@@ -90,6 +90,7 @@ umask = 0o022
 _New in version 0.6.2_
 
 """  # noqa: E501
+
 import stat
 from typing import Optional
 
@@ -100,7 +101,6 @@ from precli.core.result import Result
 from precli.i18n import _
 from precli.parsers.node_types import NodeTypes
 from precli.rules import Rule
-
 
 DEFAULT_MODE = {
     "os.mkdir": 0o777,
@@ -131,9 +131,7 @@ class OsLooseFilePermissions(Rule):
             or mode & stat.S_IXOTH
         )
 
-    def analyze_import_statement(
-        self, context: dict, package: str, alias: str
-    ) -> None:
+    def analyze_import_statement(self, context: dict, package: str, alias: str) -> None:
         if package == "stat":
             for constant in dir(stat):
                 if constant.startswith("S_"):

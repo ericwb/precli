@@ -11,7 +11,6 @@ from precli.core.run import Run
 from precli.renderers import Renderer
 from precli.rules import Rule
 
-
 logging.getLogger("markdown_it").setLevel(logging.INFO)
 
 
@@ -42,8 +41,7 @@ class Markdown(Renderer):
             if result.artifact.uri is not None:
                 if result.location.start_line != result.location.end_line:
                     lines = (
-                        f"L{result.location.start_line}-"
-                        f"L{result.location.end_line}"
+                        f"L{result.location.start_line}-" f"L{result.location.end_line}"
                     )
                 else:
                     lines = f"L{result.location.start_line}"
@@ -84,11 +82,7 @@ class Markdown(Renderer):
                 end_column = fix.deleted_location.end_column
 
                 code = linecache.getline(lineno=start_line)
-                code = (
-                    code[:start_column]
-                    + fix.inserted_content
-                    + code[end_column:]
-                )
+                code = code[:start_column] + fix.inserted_content + code[end_column:]
                 output += f"> ```{result.artifact.language}\n"
                 for line in code.splitlines():
                     output += f"> {line}\n"

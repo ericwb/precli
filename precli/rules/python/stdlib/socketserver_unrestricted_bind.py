@@ -88,6 +88,7 @@ level = "warning"
 _New in version 0.3.14_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core import utils
@@ -96,7 +97,6 @@ from precli.core.location import Location
 from precli.core.result import Result
 from precli.i18n import _
 from precli.rules import Rule
-
 
 INADDR_ANY = "0.0.0.0"
 IN6ADDR_ANY = "::"
@@ -136,9 +136,7 @@ class SocketserverUnrestrictedBind(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=arg.node),
-                description=_(
-                    "Use the localhost address to restrict binding."
-                ),
+                description=_("Use the localhost address to restrict binding."),
                 inserted_content=str(("127.0.0.1",) + server_address[1:]),
             )
             return Result(
@@ -151,9 +149,7 @@ class SocketserverUnrestrictedBind(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=arg.node),
-                description=_(
-                    "Use the localhost address to restrict binding."
-                ),
+                description=_("Use the localhost address to restrict binding."),
                 inserted_content=str(("::1",) + server_address[1:]),
             )
             return Result(

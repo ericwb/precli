@@ -78,6 +78,7 @@ level = "warning"
 _New in version 0.5.0_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -105,9 +106,7 @@ class SecureRandomWeakRandom(Rule):
             },
         )
 
-    def analyze_method_invocation(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_method_invocation(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified not in [
             "java.security.SecureRandom.getInstance",
         ]:

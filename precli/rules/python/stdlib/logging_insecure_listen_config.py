@@ -60,6 +60,7 @@ level = "warning"
 _New in version 0.1.0_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -76,9 +77,7 @@ class InsecureListenConfig(Rule):
             name="code_injection",
             description=__doc__,
             cwe_id=94,
-            message=_(
-                "Using '{0}' with unset 'verify' vulnerable to code injection."
-            ),
+            message=_("Using '{0}' with unset 'verify' vulnerable to code injection."),
         )
 
     def analyze_call(self, context: dict, call: Call) -> Optional[Result]:

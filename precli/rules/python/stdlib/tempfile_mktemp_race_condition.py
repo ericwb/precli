@@ -65,6 +65,7 @@ level = "warning"
 _New in version 0.1.9_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -155,9 +156,7 @@ class MktempRaceCondition(Rule):
                             "closure, and cleanup."
                         ),
                         deleted_location=Location(node=call.node),
-                        inserted_content=(
-                            f"tempfile.NamedTemporaryFile({arg_str})"
-                        ),
+                        inserted_content=(f"tempfile.NamedTemporaryFile({arg_str})"),
                     ),
                 ]
 

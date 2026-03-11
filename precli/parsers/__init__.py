@@ -84,7 +84,7 @@ class Parser(ABC):
         expanded_rules = []
         for rule in rule_list:
             if "-" in rule:
-                (rule_start, rule_end) = rule.split("-", maxsplit=1)
+                rule_start, rule_end = rule.split("-", maxsplit=1)
                 if rule_start[:-3] == rule_end[:-3]:
                     try:
                         start = int(rule_start[-3:])
@@ -116,18 +116,12 @@ class Parser(ABC):
 
         for rule in self.rules.values():
             if enabled is not None:
-                if (
-                    enabled == ["all"]
-                    or rule.id in enabled
-                    or rule.name in enabled
-                ):
+                if enabled == ["all"] or rule.id in enabled or rule.name in enabled:
                     rule.enabled = True
                 else:
                     rule.enabled = False
             elif disabled is not None and (
-                disabled == ["all"]
-                or rule.id in disabled
-                or rule.name in disabled
+                disabled == ["all"] or rule.id in disabled or rule.name in disabled
             ):
                 rule.enabled = False
 

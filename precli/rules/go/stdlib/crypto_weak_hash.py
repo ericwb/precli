@@ -80,6 +80,7 @@ level = "error"
 _New in version 0.2.1_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -102,9 +103,7 @@ class WeakHash(Rule):
             ),
         )
 
-    def analyze_call_expression(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_call_expression(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified in [
             "crypto/md5.New",
             "crypto/sha1.New",
@@ -112,9 +111,7 @@ class WeakHash(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=call.function_node),
-                description=_(
-                    "Use a more secure hashing algorithm like sha256."
-                ),
+                description=_("Use a more secure hashing algorithm like sha256."),
                 inserted_content="sha256.New",
             )
             return Result(
@@ -130,9 +127,7 @@ class WeakHash(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=call.function_node),
-                description=_(
-                    "Use a more secure hashing algorithm like sha256."
-                ),
+                description=_("Use a more secure hashing algorithm like sha256."),
                 inserted_content="sha256.Sum",
             )
             return Result(

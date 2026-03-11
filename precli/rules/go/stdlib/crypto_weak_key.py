@@ -139,6 +139,7 @@ rsa_key_size_error = 1024
 _New in version 0.2.1_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -162,9 +163,7 @@ class WeakKey(Rule):
             ),
         )
 
-    def analyze_call_expression(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_call_expression(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified in ["crypto/dsa.GenerateParameters"]:
             SIZE_ERR = self.config.parameters.get("dsa_key_size_error")
 

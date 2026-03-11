@@ -27,7 +27,6 @@ from precli.core.artifact import Artifact
 from precli.core.run import Run
 from precli.renderers import Renderer
 
-
 BUSL_URL = "https://spdx.org/licenses/BUSL-1.1.html"
 GITHUB_URL = "https://github.com"
 PYPI_URL = "https://pypi.org"
@@ -189,9 +188,7 @@ def setup_arg_parser():
                 try:
                     rule_yaml = yaml.safe_load(f)
                 except yaml.YAMLError:
-                    parser.error(
-                        f"argument custom-rules: failed to load '{file}'"
-                    )
+                    parser.error(f"argument custom-rules: failed to load '{file}'")
 
                 required_fields = {
                     "id",
@@ -237,9 +234,7 @@ def setup_arg_parser():
             )
 
     if args.gist and not os.getenv("GITHUB_TOKEN"):
-        parser.error(
-            "argument --gist: environment variable GITHUB_TOKEN undefined"
-        )
+        parser.error("argument --gist: environment variable GITHUB_TOKEN undefined")
 
     return args
 
@@ -271,9 +266,7 @@ def discover_files(targets: list[str], recursive: bool) -> list[Artifact]:
             ext_name = "pypi"
         else:
             ext_name = "file"
-        target_ext = loader.load_extension(
-            group="precli.targets", name=ext_name
-        )
+        target_ext = loader.load_extension(group="precli.targets", name=ext_name)
         targeter = target_ext()
         artifacts.extend(targeter.discover(target, recursive))
 
@@ -309,9 +302,7 @@ def create_gist(file, renderer: Renderer):
 def main():
     debug = (
         logging.DEBUG
-        if "-d" in sys.argv
-        or "--debug" in sys.argv
-        or os.getenv("DEBUG") is not None
+        if "-d" in sys.argv or "--debug" in sys.argv or os.getenv("DEBUG") is not None
         else logging.INFO
     )
     logging.getLogger("urllib3").setLevel(debug)
@@ -326,9 +317,7 @@ def main():
         config = args.config
 
     # CLI enabled/disabled override any config in files
-    config["enabled"] = (
-        args.enable.split(",") if args.enable else config.get("enabled")
-    )
+    config["enabled"] = args.enable.split(",") if args.enable else config.get("enabled")
     config["disabled"] = (
         args.disable.split(",") if args.disable else config.get("disabled")
     )
@@ -352,9 +341,7 @@ def main():
     run.invoke()
 
     # Render the results
-    render_ext = loader.load_extension(
-        group="precli.renderers", name=args.renderer
-    )
+    render_ext = loader.load_extension(group="precli.renderers", name=args.renderer)
     renderer = render_ext(console, args.quiet)
     renderer.render(run)
 

@@ -95,6 +95,7 @@ level = "error"
 _New in version 0.6.6_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -117,9 +118,7 @@ class SyscallSetuidRoot(Rule):
             ),
         )
 
-    def analyze_call_expression(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_call_expression(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified != "syscall.Setuid":
             return
 

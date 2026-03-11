@@ -71,6 +71,7 @@ level = "error"
 _New in version 0.1.9_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -88,8 +89,7 @@ class PopCleartext(Rule):
             description=__doc__,
             cwe_id=319,
             message=_(
-                "The POP protocol can transmit data in cleartext without "
-                "encryption."
+                "The POP protocol can transmit data in cleartext without " "encryption."
             ),
         )
 
@@ -103,18 +103,14 @@ class PopCleartext(Rule):
             return
 
         symbol = context["symtab"].get(call.var_node.text.decode())
-        if "stls" in [
-            x.identifier_node.text.decode() for x in symbol.call_history
-        ]:
+        if "stls" in [x.identifier_node.text.decode() for x in symbol.call_history]:
             return
 
         init_call = symbol.call_history[0]
         fixes = Rule.get_fixes(
             context=context,
             deleted_location=Location(node=init_call.identifier_node),
-            description=_(
-                "Use the 'POP3_SSL' module to secure the connection."
-            ),
+            description=_("Use the 'POP3_SSL' module to secure the connection."),
             inserted_content="POP3_SSL",
         )
 

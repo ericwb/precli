@@ -68,6 +68,7 @@ ec_key_size_error = 160
 _New in version 0.2.3_
 
 """  # noqa: E501
+
 import re
 from typing import Optional
 
@@ -119,9 +120,7 @@ class SslContextWeakKey(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=arg.node),
-                description=_(
-                    f"Use a curve with a minimum size of {SIZE_WARN} bits."
-                ),
+                description=_(f"Use a curve with a minimum size of {SIZE_WARN} bits."),
                 inserted_content='"secp256k1"',
             )
 

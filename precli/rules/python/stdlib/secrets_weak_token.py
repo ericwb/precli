@@ -63,6 +63,7 @@ error_token_size = 16
 _New in version 0.3.14_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -104,9 +105,7 @@ class SecretsWeakToken(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=arg.node),
-                description=_(
-                    "Pass None or no parameter to use the default entropy."
-                ),
+                description=_("Pass None or no parameter to use the default entropy."),
                 inserted_content="None",
             )
 

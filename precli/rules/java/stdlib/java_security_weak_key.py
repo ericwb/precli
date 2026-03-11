@@ -95,6 +95,7 @@ key_size_error = 1024
 _New in version 0.5.0_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -123,9 +124,7 @@ class KeyPairGeneratorWeakKey(Rule):
             },
         )
 
-    def analyze_method_invocation(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_method_invocation(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified not in [
             "java.security.KeyPairGenerator.getInstance.initialize"
         ]:
@@ -152,9 +151,7 @@ class KeyPairGeneratorWeakKey(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=argument.node),
-                description=_(
-                    f"Use a minimum key size of {SIZE_WARN} for RSA keys."
-                ),
+                description=_(f"Use a minimum key size of {SIZE_WARN} for RSA keys."),
                 inserted_content=f"{SIZE_WARN}",
             )
 

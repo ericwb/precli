@@ -103,6 +103,7 @@ level = "warning"
 _New in version 0.8.1_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core import utils
@@ -111,7 +112,6 @@ from precli.core.location import Location
 from precli.core.result import Result
 from precli.i18n import _
 from precli.rules import Rule
-
 
 INADDR_ANY = "0.0.0.0"
 IN6ADDR_ANY = "[::]"
@@ -130,9 +130,7 @@ class CryptoUnrestrictedBind(Rule):
             ),
         )
 
-    def analyze_call_expression(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_call_expression(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified not in ("crypto/tls.Listen",):
             return
 
@@ -153,9 +151,7 @@ class CryptoUnrestrictedBind(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=arg.node),
-                description=_(
-                    "Use the localhost address to restrict binding."
-                ),
+                description=_("Use the localhost address to restrict binding."),
                 inserted_content=f'"127.0.0.1:{laddr[1]}"',
             )
             return Result(
@@ -168,9 +164,7 @@ class CryptoUnrestrictedBind(Rule):
             fixes = Rule.get_fixes(
                 context=context,
                 deleted_location=Location(node=arg.node),
-                description=_(
-                    "Use the localhost address to restrict binding."
-                ),
+                description=_("Use the localhost address to restrict binding."),
                 inserted_content=f'"[::1]:{laddr[1]}"',
             )
             return Result(

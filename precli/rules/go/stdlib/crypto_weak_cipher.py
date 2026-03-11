@@ -129,6 +129,7 @@ level = "error"
 _New in version 0.2.1_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -151,9 +152,7 @@ class WeakCipher(Rule):
             ),
         )
 
-    def analyze_call_expression(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_call_expression(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified in [
             "crypto/des.NewCipher",
             "crypto/des.NewTripleDESCipher",

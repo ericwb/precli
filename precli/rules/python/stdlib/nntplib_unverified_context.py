@@ -74,6 +74,7 @@ level = "warning"
 _New in version 0.3.14_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -81,7 +82,6 @@ from precli.core.location import Location
 from precli.core.result import Result
 from precli.i18n import _
 from precli.rules import Rule
-
 
 CONTEXT_FIX = "ssl.create_default_context()"
 
@@ -121,18 +121,14 @@ class NntplibUnverifiedContext(Rule):
             result_node = call.function_node
             arg_list_node = call.arg_list_node
             fix_node = arg_list_node
-            args = [
-                child.text.decode() for child in arg_list_node.named_children
-            ]
+            args = [child.text.decode() for child in arg_list_node.named_children]
             args.append(f"context={CONTEXT_FIX}")
             content = f"({', '.join(args)})"
 
         fixes = Rule.get_fixes(
             context=context,
             deleted_location=Location(node=fix_node),
-            description=_(
-                f"Pass {CONTEXT_FIX} to safely validate certificates."
-            ),
+            description=_(f"Pass {CONTEXT_FIX} to safely validate certificates."),
             inserted_content=content,
         )
         return Result(

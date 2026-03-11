@@ -82,6 +82,7 @@ weak_hashes = [
 _New in version 0.5.0_
 
 """  # noqa: E501
+
 from typing import Optional
 
 from precli.core.call import Call
@@ -109,9 +110,7 @@ class MessageDigestWeakHash(Rule):
             },
         )
 
-    def analyze_method_invocation(
-        self, context: dict, call: Call
-    ) -> Optional[Result]:
+    def analyze_method_invocation(self, context: dict, call: Call) -> Optional[Result]:
         if call.name_qualified not in [
             "java.security.MessageDigest.getInstance",
         ]:
@@ -120,10 +119,8 @@ class MessageDigestWeakHash(Rule):
         argument = call.get_argument(position=0)
         algorithm = argument.value_str
 
-        if (
-            algorithm is None
-            or algorithm.upper()
-            not in self.config.parameters.get("weak_hashes")
+        if algorithm is None or algorithm.upper() not in self.config.parameters.get(
+            "weak_hashes"
         ):
             return
 
